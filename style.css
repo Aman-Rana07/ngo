@@ -1,0 +1,151 @@
+*{
+    box-sizing: border-box;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+   overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+.all{
+
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    align-items: center;      
+}
+
+.ngo-logo{
+    background-color:#ffffff;
+width: 100%;
+height: 5%;
+display: flex;
+align-items: center;
+padding: 0 30px;
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.ngo-logo{
+    display: flex;
+    align-items: center;
+}
+.ngo-logo img{
+     height: 60px;
+    width: auto;
+}
+
+
+#ab{
+   text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 45px; 
+    font-weight:bolder; 
+    color: rgb(1, 0, 0); 
+}
+.main {
+    display: flex;
+    gap: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    max-width: 1100px;
+}
+.Information{
+    width: 500px;
+    padding-top: 20px;
+    text-align: center;
+    padding-right: 10px;
+    border-right: 1px solid rgba(209,42,44);
+
+}
+.image-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vol-image{
+   
+     width: 350px;       
+    height: auto;  
+}
+#perks{
+   list-style-position: inside;
+}
+#perks li {
+    text-align: left;
+    margin: 6px 0;
+}
+
+
+
+.form-part {
+            width: 500px;
+            padding-top: 20px;
+           
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p{
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: rgba(209,42,44);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #A72223
+        }
+       
+ footer{
+width: 100%;
+bottom: 0;
+}
+.social-media img { 
+    width: 40px;
+     height: 40px;
+     border-radius: 50%; 
+     background: white; 
+     padding: 8px;
+     
+    }
+
+.social-media a {
+    text-decoration: none;   
+    outline: none;           
+}
+
+.foot{
+    padding-left: 20px;
+    padding-right:20px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    height:70px;
+    background-color: #A72223;
+   
+}
