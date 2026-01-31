@@ -1,151 +1,344 @@
-*{
+/* GLOBAL  */
+* { margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-html,body{
+
+html, body {
     width: 100%;
     height: 100%;
-   overflow-x: hidden;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-}
-.all{
-
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-    align-items: center;      
+    overflow-x: hidden;
 }
 
-.ngo-logo{
-    background-color:#ffffff;
-width: 100%;
-height: 5%;
-display: flex;
-align-items: center;
-padding: 0 30px;
-box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-.ngo-logo{
+/*  HEADER  */
+.ngo-logo {
+   
+    width: 100%;
+    height: 5%;
+    padding: 0 30px;
     display: flex;
     align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
-.ngo-logo img{
-     height: 60px;
+
+.ngo-logo img {
+     
+    height: 60px;
     width: auto;
 }
+.coverphoto img{
+    width: 100%;
+    height: auto;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+border: 4px  solid 
+firebrick;
 
-
-#ab{
-   text-align: left;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 45px; 
-    font-weight:bolder; 
-    color: rgb(1, 0, 0); 
 }
+
+
+/*  ABOUT US  */
+h2{
+    font-family: 'League Gothic', sans-serif;
+    font-size: 35px;
+}
+.headings {
+    padding-top: 25px;
+    text-align: center;
+    font-family: 'League Gothic', sans-serif;
+    font-size: 80px;
+    font-weight: bolder;
+    padding-left: 5px;
+    color: firebrick;
+}
+.extra_text{
+
+
+    margin-top: 100px;
+   font-size: 30px;
+   font-weight: bolder ;
+   color:whitesmoke;
+   background-color:firebrick;
+   padding: 10px;
+}
+ 
+/*  MAIN LAYOUT  */
+.all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
 .main {
     display: flex;
     gap: 40px;
-    background: white;
+    max-width: 1100px;
     padding: 30px;
+    width: 100%;
+    flex-wrap: wrap;
+    background:white;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0,0,0,0.15);
-    max-width: 1100px;
 }
-.Information{
+
+/* LEFT PANEL */
+.Information {
     width: 500px;
     padding-top: 20px;
-    text-align: center;
     padding-right: 10px;
+    text-align: center;
     border-right: 1px solid rgba(209,42,44);
+}
 
+#perks {
+    list-style-position: inside;
 }
-.image-box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.vol-image{
-   
-     width: 350px;       
-    height: auto;  
-}
-#perks{
-   list-style-position: inside;
-}
+
 #perks li {
     text-align: left;
     margin: 6px 0;
 }
 
-
-
-.form-part {
-            width: 500px;
-            padding-top: 20px;
-           
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        p{
-            text-align: center;
-        }
-        form {
-            margin-top: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: rgba(209,42,44);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-        button:hover {
-            background: #A72223
-        }
-       
- footer{
-width: 100%;
-bottom: 0;
+.image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.social-media img { 
+
+.vol-image {
+    width: 350px;
+    height: auto;
+}
+
+/* RIGHT PANEL */
+.form-part {
+    width: 500px;
+    padding-top: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: rgba(209,42,44);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #A72223;
+}
+
+/*  FOOTER  */
+footer { 
+    margin-top: 100px;
+    width: 100%;
+}
+
+.foot {
+    height: 70px;
+    padding: 0 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background-color: #A72223;
+}
+
+.social-media img {
     width: 40px;
-     height: 40px;
-     border-radius: 50%; 
-     background: white; 
-     padding: 8px;
-     
-    }
+    height: 40px;
+    padding: 8px;
+    border-radius: 50%;
+    background: white;
+}
 
 .social-media a {
-    text-decoration: none;   
-    outline: none;           
+    text-decoration: none;
+    outline: none;
 }
 
-.foot{
-    padding-left: 20px;
-    padding-right:20px ;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width:100%;
-    height:70px;
-    background-color: #A72223;
+.About-Us{
+    padding-left:15%;
+    padding-right: 15%;
+}
+
+.Mission_Vision{
+    margin-top: 150px;
+    padding-left: 15%;
+    padding-right: 15%;
+    
+}
+
+
+/* INITIATIVE PAGE*/
+
+
+.Edushala{
+    text-align: left;
+    padding-top: 30px;
+    padding-left:15%;
+    padding-right: 15%;
+}
+.Edushala ul{
+    padding-left: 10px;
+    display: inline-block;   
+    text-align:left;       
+}
+
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+#ini1 img  {
+    margin-top: 10px;
+
+    border: 2px solid  black;
    
+
+}
+/* ACHIEVEMENTS PAGE*/
+
+#achievements{
+   
+    padding-left: 10%;
+    padding-right: 15%;
+    text-align: left;
+   line-height: 1.5;
+}
+
+.Gallery_Heading{
+     padding-top: 25px;
+    text-align: center;
+    font-family: 'League Gothic', sans-serif;
+    font-size: 80px;
+    font-weight: bolder;
+    padding-left: 5px;
+    
+
+}
+.Gallery{
+    display: inline-block;
+
+ border: 2px solid #333;
+  
+}
+
+.page{
+    
+    min-height: 100vh;
+    background:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact-card{
+    
+    background: rgba(228, 10, 10, 0.613);
+    width: 80%;
+    max-width: 1000px;
+    padding: 60px;
+    display: flex;
+    gap: 60px;
+    
+}
+.left{
+    flex: 1;
+}
+
+.left h1{
+    font-size: 40px;
+    color: white ;
+    margin-bottom: 10px;
+}
+
+.subtitle{
+    margin-bottom: 20px;
+    color: white;
+}
+
+.desc{
+    color: white;
+    line-height: 1.6;
+}
+.right{
+    flex: 1;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.row{
+    display: flex;
+    gap: 10px;
+}
+
+input, textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+textarea{
+    height: 100px;
+    resize: none;
+}
+
+button{
+    width: 120px;
+    align-self: flex-end;
+    padding: 10px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.icons{
+    text-decoration: none;
+    outline: none;
+   padding-left: 135px;
+
+}
+.icons img{
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 50%;
+    background: white;
 }
