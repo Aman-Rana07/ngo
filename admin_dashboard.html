@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Admin Dashboard</title>
+</head>
+<body style="background-color: white;">
+    <header class="ngo-header">
+        <div class="ngo-logo">
+            <img src="long_logo.png" alt="LOGO">
+            <p class ="header_links" style="padding:15px"><a href="homepage.html"> Home</a></p>
+            <p class ="header_links" style="padding:15px"><a href="admin_login.html"> Logout</a></p>
+        </div>
+    </header>
+
+    <div class="all">
+        <div class="main">
+            <div class="Information" style="width:100%">
+                <h1>Pending Volunteer Approvals</h1>
+                <div id="pendingList">Loading...</div>
+                
+                <hr style="margin: 40px 0;">
+                
+                <h1>Approved Volunteers</h1>
+                <div id="volunteersList">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        if (!token) {
+            alert('Not logged in.');
+            window.location.href = 'admin_login.html';
+        }
+
+        async function loadPending() {
+            const res = await fetch('/api/admin/pending', {
+                headers: { 'x-admin-token': token }
+            });
+            if (!res.ok) {
+                const err = await res.json();
+                document.getElementById('pendingList').innerText = 'Error: ' + (err.error || res.status);
+                return;
+            }
+            const data = await res.json();
+            renderPending(data.pending || []);
+        }
+        
+        async function loadVolunteers() {
+            const res = await fetch('/api/admin/volunteers', {
+                headers: { 'x-admin-token': token }
+            });
+            if (!res.ok) {
+                const err = await res.json();
+                document.getElementById('volunteersList').innerText = 'Error: ' + (err.error || res.status);
+                return;
+            }
+            const data = await res.json();
+            renderVolunteers(data.volunteers || []);
+        }
+
+        function renderPending(list) {
+            const container = document.getElementById('pendingList');
+            if (!list.length) {
+                container.innerHTML = '<p>No pending requests.</p>';
+                return;
+            }
+            container.innerHTML = '';
+            list.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'pending-item';
+                el.style.border = '1px solid #ccc';
+                el.style.padding = '12px';
+                el.style.marginBottom = '8px';
+                el.innerHTML = `
+                    <strong>${item.name}</strong> — ${item.email}<br>
+                    Phone: ${item.phone || '-'} | Age: ${item.age || '-'}<br>
+                    <em>Interests:</em> ${item.interests || '-'}<br>
+                    <em>Experience:</em> ${item.experience || '-'}
+                `;
+
+                const approveBtn = document.createElement('button');
+                approveBtn.innerText = 'Approve';
+                approveBtn.style.marginRight = '8px';
+                approveBtn.onclick = () => handleDecision(item.id, true);
+
+                const denyBtn = document.createElement('button');
+                denyBtn.innerText = 'Deny';
+                denyBtn.onclick = () => handleDecision(item.id, false);
+
+                el.appendChild(document.createElement('br'));
+                el.appendChild(approveBtn);
+                el.appendChild(denyBtn);
+
+                container.appendChild(el);
+            });
+        }
+        
+        function renderVolunteers(list) {
+            const container = document.getElementById('volunteersList');
+            if (!list.length) {
+                container.innerHTML = '<p>No approved volunteers yet.</p>';
+                return;
+            }
+            container.innerHTML = '';
+            list.forEach(item => {
+                const el = document.createElement('div');
+                el.style.border = '1px solid #28a745';
+                el.style.padding = '12px';
+                el.style.marginBottom = '8px';
+                el.style.backgroundColor = '#f0f8f0';
+                el.innerHTML = `
+                    <strong>${item.name}</strong> — ${item.email}<br>
+                    Phone: ${item.phone || '-'} | Age: ${item.age || '-'}<br>
+                    <em>Interests:</em> ${item.interests || '-'}<br>
+                    <em>Experience:</em> ${item.experience || '-'}<br>
+                    <small>Approved: ${new Date(item.approved_at).toLocaleDateString()}</small>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        async function handleDecision(id, approve) {
+            const url = approve ? '/api/admin/approve' : '/api/admin/deny';
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+                body: JSON.stringify({ id })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                alert('Error: ' + (data.error || res.status));
+                return;
+            }
+            alert(data.message || (approve ? 'Approved' : 'Denied'));
+            loadPending();
+            loadVolunteers();
+        }
+
+        loadPending();
+        loadVolunteers();
+    </script>
+</body>
+</html>
