@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
@@ -35,8 +36,8 @@ app.get('/', (req, res) => {
 const adminSessions = new Map();
 
 // Simple admin credentials (change as needed)
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'admin123';
+const ADMIN_USER = process.env.ADMIN_USER || 'admin';
+const ADMIN_PASS = process.env.ADMIN_PASS || 'admin123';
 
 // Initialize SQLite DB
 const dbFile = path.join(__dirname, 'volunteers.db');
@@ -92,13 +93,12 @@ app.post('/api/register', (req, res) => {
 // Admin login -> returns token
 app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body || {};
+  
+  // ADD THIS LINE RIGHT HERE:
+  console.log(`ATTEMPT -> User: [${username}] Pass: [${password}]`);
+
   if (username === ADMIN_USER && password === ADMIN_PASS) {
-    const token = crypto.randomBytes(24).toString('hex');
-    adminSessions.set(token, { created: Date.now() });
-    return res.json({ token });
-  }
-  res.status(401).json({ error: 'Invalid credentials' });
-});
+      // ... rest of your code
 
 function requireAdminToken(req, res, next) {
   const token = req.headers['x-admin-token'] || req.headers['authorization'];

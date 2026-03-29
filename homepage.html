@@ -11,7 +11,7 @@
 <body style="background-color: white;">
     <header class="ngo-header">
         <div class="ngo-logo">
-            <img src="https://aicdn.picsart.com/349e248b-a4ab-428f-8b6f-e58e96632ca6.jpg" alt="LOGO">
+            <img src="logo.jpg" alt="LOGO">
              <p class =" header_links"style="padding:15px"> 
                 
             <a href="homepage.html"> Home</a>        
@@ -29,6 +29,9 @@
             <p class ="header_links"style="padding:15px"> 
               <a href="Contact-us.html">Contact Us</a>
             </p>
+            <p class="header_links" style="padding:15px">
+    <a href="admin_login.html">Admin Login</a>
+</p>
         </div>
        
     </header>
@@ -123,7 +126,7 @@
                 <h1>Welcome to KIND BEINGS Volunteer Portal</h1>
                 <p>Register to volunteer with us and make a difference in the community!</p>
 
-                <form action="#" method="post">
+              <form id="volunteerForm">
                     <label for="name">Full Name:</label>
                     <input type="text" id="name" name="name" required>
 
@@ -169,12 +172,45 @@
                     <img src="LinkedIn_icon_circle.svg.png" alt="LinkedIn">
                 </a>
                 <a href="https://www.facebook.com/thekindbeings/about" target="_blank">
-                    <img src="fb.png" alt="Facebook">
+                    <img src="Facebook_icon.jpg" alt="Facebook">
                 </a>
             </div>
 
         </div>
     </footer>
+<script>
+document.getElementById('volunteerForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); // This stops the page from redirecting to homepage.html
 
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        age: document.getElementById('age').value,
+        interests: document.getElementById('interests').value,
+        experience: document.getElementById('experience').value
+    };
+
+    try {
+        const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Success: ' + result.message);
+            window.location.href = 'homepage.html'; // Redirect ONLY after success
+        } else {
+            alert('Error: ' + result.error);
+        }
+    } catch (err) {
+        console.error('Submission error:', err);
+        alert('Failed to submit. Is the server running?');
+    }
+});
+</script>
 </body>
 </html>
