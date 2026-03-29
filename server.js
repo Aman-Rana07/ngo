@@ -153,7 +153,6 @@ app.post('/api/admin/deny', requireAdminToken, (req, res) => {
     res.json({ message: 'Denied and removed' });
   });
 });
-
 // Optional: list approved volunteers
 app.get('/api/admin/volunteers', requireAdminToken, (req, res) => {
   db.all('SELECT * FROM volunteers ORDER BY approved_at DESC', (err, rows) => {
@@ -162,6 +161,7 @@ app.get('/api/admin/volunteers', requireAdminToken, (req, res) => {
   });
 });
 
+// THIS MUST BE THE VERY LAST THING IN THE FILE:
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
