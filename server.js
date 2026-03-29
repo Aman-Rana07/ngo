@@ -94,11 +94,16 @@ app.post('/api/register', (req, res) => {
 app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body || {};
   
-  // ADD THIS LINE RIGHT HERE:
   console.log(`ATTEMPT -> User: [${username}] Pass: [${password}]`);
 
   if (username === ADMIN_USER && password === ADMIN_PASS) {
-      // ... rest of your code
+    const token = crypto.randomBytes(24).toString('hex');
+    adminSessions.set(token, { created: Date.now() });
+    return res.json({ token });
+  } else {
+    res.status(401).json({ error: 'Invalid credentials' });
+  }
+});
 
 function requireAdminToken(req, res, next) {
   const token = req.headers['x-admin-token'] || req.headers['authorization'];
@@ -153,6 +158,7 @@ app.post('/api/admin/deny', requireAdminToken, (req, res) => {
     res.json({ message: 'Denied and removed' });
   });
 });
+
 // Optional: list approved volunteers
 app.get('/api/admin/volunteers', requireAdminToken, (req, res) => {
   db.all('SELECT * FROM volunteers ORDER BY approved_at DESC', (err, rows) => {
@@ -161,7 +167,7 @@ app.get('/api/admin/volunteers', requireAdminToken, (req, res) => {
   });
 });
 
-// THIS MUST BE THE VERY LAST THING IN THE FILE:
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
